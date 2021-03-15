@@ -1,0 +1,1 @@
+string StrQuery="INSERT INTO tableName VALUES ('" + dataGridView1.Rows[i].Cells[0].Value + "',' " + dataGridView1.Rows[i].Cells[1].Value + "', '" + dataGridView1.Rows[i].Cells[2].Value + "', '" + dataGridView1.Rows[i].Cells[3].Value + "',' " + dataGridView1.Rows[i].Cells[4].Value + "')";
