@@ -1,2 +1,2 @@
 # DatagridView
-Data from DatagridView in SQL SERVER 2019
+ZKteco machine Fetch data from it & Store in Database. 
