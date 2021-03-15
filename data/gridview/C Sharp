@@ -1,0 +1,66 @@
+ /*for (int i = 0; i < dgvRecords.Rows.Count; i++)
+            {
+                SqlCommand cmd = new SqlCommand(@"INSERT INTO tbl_info(MachineNumber,EnrollNumber,Names,FingerIndex,TmpData,Privelage,passwords,Enables,iFlag)VALUES('" + dgvRecords.Rows[i].Cells[0].Value + "','" + dgvRecords.Rows[i].Cells[1].Value + "','" + dgvRecords.Rows[i].Cells[2].Value + "','" + dgvRecords.Rows[i].Cells[3].Value + "','" + dgvRecords.Rows[i].Cells[4].Value + "','" + dgvRecords.Rows[i].Cells[5].Value + "','" + dgvRecords.Rows[i].Cells[6].Value + "','" + dgvRecords.Rows[i].Cells[7].Value + "','" + dgvRecords.Rows[i].Cells[8].Value + "')");
+                Con.Open();
+                cmd.ExecuteNonQuery();
+                Con.Close();
+            }*/
+
+
+foreach (DataGridViewRow row in dgvRecords.Rows)
+            {
+                string constring = @"Data Source=DESKTOP-R13NT5O;Initial Catalog=Biometrics;Persist Security Info=True;User ID=sak;Password=sak";
+                using (SqlConnection con = new SqlConnection(constring))
+                {
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO tbl_info VALUES(@MachineNumber,@EnrollNumber,@Names,@FingerIndex,@TmpData,@Privelage,@passwords,@Enables,@iFlag)", con))
+                    {
+                        cmd.Parameters.AddWithValue("@MachineNumber", row.Cells["MachineNumber"].Value);
+                        cmd.Parameters.AddWithValue("@EnrollNumber", row.Cells["EnrollNumber"].Value);
+                        cmd.Parameters.AddWithValue("@Names", row.Cells["Name"].Value);
+                        cmd.Parameters.AddWithValue("@FingerIndex", row.Cells["FingerIndex"].Value);
+                        cmd.Parameters.AddWithValue("@TmpData", row.Cells["TmpData"].Value);
+                        cmd.Parameters.AddWithValue("@Privelage", row.Cells["Privelage"].Value);
+                        cmd.Parameters.AddWithValue("@passwords", row.Cells["Password"].Value);
+                        cmd.Parameters.AddWithValue("@Enables", row.Cells["Enabled"].Value);
+                        cmd.Parameters.AddWithValue("@iFlag", row.Cells["iFlag"].Value);
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+            }
+           // MessageBox.Show("Records inserted.");
+
+            /* string constring = @"Data Source=DESKTOP-R13NT5O;Initial Catalog=Biometrics;Persist Security Info=True;User ID=sak;Password=sak";
+             SqlConnection con = new SqlConnection(constring);
+             SqlTransaction transaction = con.BeginTransaction();
+             try
+             {
+                 con.Open();
+                 foreach (DataGridViewRow row in dgvRecords.Rows)
+                 {
+                     using (SqlCommand cmd = new SqlCommand("INSERT INTO Gettbl_info([MachineNumber],[EnrollNumber],[Names],[FingerIndex],[TmpData],[Privelage],[passwords],[Enables],[iFlag])VALUES(@MachineNumber,@EnrollNumber,@Names,@FingerIndex,@TmpData,@Privelage,@passwords,@Enables,@iFlag)", con))
+                     {
+                         cmd.Parameters.AddWithValue("@MachineNumber", row.Cells["MachineNumber"].Value);
+                         cmd.Parameters.AddWithValue("@EnrollNumber", row.Cells["EnrollNumber"].Value);
+                         cmd.Parameters.AddWithValue("@Names", row.Cells["Names"].Value);
+                         cmd.Parameters.AddWithValue("@FingerIndex", row.Cells["FingerIndex"].Value);
+                         cmd.Parameters.AddWithValue("@TmpData", row.Cells["TmpData"].Value);
+                         cmd.Parameters.AddWithValue("@Privelage", row.Cells["Privelage"].Value);
+                         cmd.Parameters.AddWithValue("@passwords", row.Cells["passwords"].Value);
+                         cmd.Parameters.AddWithValue("@Enablese", row.Cells["Enablese"].Value);
+                         cmd.Parameters.AddWithValue("@iFlag", row.Cells["iFlag"].Value);
+                         cmd.Transaction = transaction;
+                         cmd.ExecuteNonQuery();
+                     }
+                 }
+                 transaction.Commit();
+                 con.Close();
+                 MessageBox.Show("Successfully Saved!");
+             }
+             catch (Exception ex)
+             {
+                 transaction.Rollback();
+                 con.Close();
+                 MessageBox.Show(ex.Message);
+             }*/
